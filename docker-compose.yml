@@ -2,23 +2,23 @@ version: '3.8'
 
 services:
   # CONTENEDOR 1: La Base de Datos (PostgreSQL 16)
-  postgresql_xxx:
+  postgresql_JMB:
     image: postgres:16
     container_name: postgresql_JMB
     restart: always
     ports:
-      - "2345:5432" # Requisito: Externo 2345 : Interno 5432
+      - "2345:5432" 
     env_file:
       - .env
     environment:
-      # Postgres usa nombres de variables distintos a MariaDB
-      POSTGRES_DB: gobierno_recu345_JMB
+      POSTGRES_DB: gobierno_recu_jmb
       POSTGRES_USER: aaee_gobierno
-      POSTGRES_PASSWORD: ${1234} 
+      POSTGRES_PASSWORD: ${DB_PASSWORD} # Corrección: Usar el nombre de la variable del .env
 
   # CONTENEDOR 2: Tu aplicación Spring Boot
   api_rest:
-    image: ghcr.io/profies/aaee_mapamundi_sb:latest # Asegúrate de que el Action haya terminado
+    # RECUERDA: Cambia 'imoya-21' por TU usuario de GitHub en minúsculas
+    image: ghcr.io/imoya-21/examen-recu-ra345:latest 
     container_name: api_rest_xxx
     restart: always
     ports:
@@ -26,4 +26,4 @@ services:
     env_file:
       - .env
     depends_on:
-      - postgresql_JMB # Referencia al nombre del servicio de arriba
+      - postgresql_JMB # Debe coincidir exactamente con el nombre del servicio arriba
