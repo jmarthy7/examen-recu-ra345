@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # CONTENEDOR 1: La Base de Datos (PostgreSQL 16)
+  postgresql_xxx:
+    image: postgres:16
+    container_name: postgresql_JMB
+    restart: always
+    ports:
+      - "2345:5432" # Requisito: Externo 2345 : Interno 5432
+    env_file:
+      - .env
+    environment:
+      # Postgres usa nombres de variables distintos a MariaDB
+      POSTGRES_DB: gobierno_recu345_JMB
+      POSTGRES_USER: aaee_gobierno
+      POSTGRES_PASSWORD: ${1234} 
+
+  # CONTENEDOR 2: Tu aplicación Spring Boot
+  api_rest:
+    image: ghcr.io/profies/aaee_mapamundi_sb:latest # Asegúrate de que el Action haya terminado
+    container_name: api_rest_xxx
+    restart: always
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - postgresql_JMB # Referencia al nombre del servicio de arriba
