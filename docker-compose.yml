@@ -18,7 +18,7 @@ services:
   # CONTENEDOR 2: Tu aplicación Spring Boot
   api_rest:
     # RECUERDA: Cambia 'imoya-21' por TU usuario de GitHub en minúsculas
-    image: ghcr.io/imoya-21/examen-recu-ra345:latest 
+    image: ghcr.io/jmarthy7/examen-recu-ra345:latest 
     container_name: api_rest_xxx
     restart: always
     ports:
